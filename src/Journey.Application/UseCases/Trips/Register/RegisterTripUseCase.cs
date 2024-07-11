@@ -4,11 +4,6 @@ using Journey.Exception;
 using Journey.Exception.ExceptionsBase;
 using Journey.Infrastructure;
 using Journey.Infrastructure.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Journey.Application.UseCases.Trips.Register
 {
@@ -44,17 +39,17 @@ namespace Journey.Application.UseCases.Trips.Register
         {
             if (string.IsNullOrWhiteSpace(request.Name))
             {
-                throw new JourneyException(ResourceErrorMessages.NOME_VAZIO);
+                throw new ErrorOnValidationException(ResourceErrorMessages.NOME_VAZIO);
             }
 
             if (request.StartDate.Date < DateTime.UtcNow.Date)
             {
-                throw new JourneyException(ResourceErrorMessages.DATA_VIAGEM_ERROR);
+                throw new ErrorOnValidationException(ResourceErrorMessages.DATA_VIAGEM_ERROR);
             }
 
             if (request.EndDate.Date < request.StartDate.Date )
             {
-                throw new JourneyException(ResourceErrorMessages.DATA_FINAL_ERROR);
+                throw new ErrorOnValidationException(ResourceErrorMessages.DATA_FINAL_ERROR);
             }
 
         }
